@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coronal Mass Ejections - Date Range</title>
+    <style>
+        body {
+            background-color: #1c1c2b;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            background: #2d2d44;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: #ff9f1a;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff9f1a;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            background: #cccccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="date"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .submit-btn {
+            background: #6bc46e;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #58a55c;
+        }
+        .data-container {
+            text-align: left;
+            background: #3b3b5c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .cme-entry {
+            background: #444466;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .cme-entry p {
+            margin: 5px 0;
+        }
+        .error {
+            color: #ff4d4d;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            if (new Date(startDate) > new Date(endDate)) {
+                errorMessage.textContent = "End date must be after the start date.";
+                return false;
+            }
+            errorMessage.textContent = "";
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/" class="home-link">Home</a>
+            <a href="/solarflair">Solar Flares</a>
+            <a href="/asteroids">Close Asteroids</a>
+        </div>
+
+        <h1>Get Important Details About CMEs</h1>
+        <h2>Within a Certain Date Range</h2>
+        <div class="form-group">
+            <form method="POST" action="/cme" onsubmit="return validateForm()">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start_date" aria-label="Select start date" required>
+                
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end_date" aria-label="Select end date" required>
+                
+                <button type="submit" class="submit-btn">Get Data</button>
+                <p id="error-message" class="error"></p>
+            </form>
+        </div>
+
+        {% if cme and cme|length > 0 %}
+            <h2>CMEs from {{ start_date }} to {{ end_date }}</h2>
+            <div class="data-container">
+                {% for entry in cme %}
+                    <div class="cme-entry">
+                        <p><strong>Time:</strong> {{ entry.startTime }}</p>
+                        <p><strong>Location:</strong> {{ entry.sourceLocation }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No CME data found for the selected range.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

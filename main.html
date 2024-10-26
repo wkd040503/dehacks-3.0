@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Space Events</title>
+    <style>
+        body {
+            background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/pia23046_main.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: block;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #555;
+        }
+        .button img {
+            max-height: 150px;
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recent Space Events</h1>
+        <a href="/cme" class="button">
+            <img src="https://example.com/cme_image.jpg">
+            Coronal Mass Ejections
+        </a>
+        <a href="/solarflair" class="button">
+            <img src="https://example.com/solar_flare_image.jpg">
+            Solar Flares
+        </a>
+        <a href="/asteroids" class="button">
+            <img src="https://example.com/asteroid_image.jpg">
+            Close Asteroids
+        </a>
+    </div>
+</body>
+</html>
