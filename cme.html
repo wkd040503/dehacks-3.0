@@ -6,7 +6,10 @@
     <title>Coronal Mass Ejections - Date Range</title>
     <style>
         body {
-            background-color: #1c1c2b;
+            background-image: url('https://images-ext-1.discordapp.net/external/xz2N87iSJ9JjIkYfaZd0PePKzMUq0Lk-JbEYgM9TLnM/https/madeinvilnius.lt/wp-content/uploads/2023/12/vecteezy_hyper-realistic-image-of-the-sun-s-surface-showcasing-the_28558566-scaled.jpg?format=webp&width=2190&height=1228');
+            background-size: cover;
+            background-repeat: repeat-x;
+            background-position: 50% 0;
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -139,10 +142,15 @@
             <h2>CMEs from {{ start_date }} to {{ end_date }}</h2>
             <div class="data-container">
                 {% for entry in cme %}
-                    <div class="cme-entry">
-                        <p><strong>Time:</strong> {{ entry.startTime }}</p>
-                        <p><strong>Location:</strong> {{ entry.sourceLocation }}</p>
-                    </div>
+                <div class="cme-entry">
+                    <p><strong>Time:</strong> {{ entry.startTime }}</p>
+                    <p><strong>Location:</strong> {{ entry.sourceLocation }}</p>
+                    {% if entry.is_dangerous %}
+                        <p style="color: #ff4d4d;"><strong>This CME may cause disruptions to satellites and power grids. Take precautions!</strong></p>
+                    {% else %}
+                        <p style="color: #6bc46e;"><strong>This CME is not considered dangerous.</strong></p>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
         {% else %}

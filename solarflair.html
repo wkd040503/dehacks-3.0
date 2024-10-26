@@ -6,7 +6,9 @@
     <title>Solar Flares - Date Range</title>
     <style>
         body {
-            background-color: #1c1c2b;
+            background-image: url('https://2.img-dpreview.com/files/p/E~TS1180x0~articles/8679954519/doran-sun-4k.jpeg');
+            background-repeat: no-repeat;
+            background-size: 100%;
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -57,7 +59,7 @@
             margin-bottom: 5px;
         }
         input[type="date"] {
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
             border: 1px solid #ddd;
             width: 100%;
@@ -139,13 +141,22 @@
             <h2>Solar Flares from {{ start_date }} to {{ end_date }}</h2>
             <div class="data-container">
                 {% for entry in solar_flare %}
-                    <div class="flare-entry">
-                        <p><strong>Start Time:</strong> {{ entry.startTime }}</p>
-                        <p><strong>Peak Time:</strong> {{ entry.peakTime }}</p>
-                        <p><strong>End Time:</strong> {{ entry.endTime }}</p>
-                        <p><strong>Class Type:</strong> {{ entry.classType }}</p>
-                        <p><strong>Source Location:</strong> {{ entry.sourceLocation }}</p>
-                    </div>
+                <div class="flare-entry">
+                    <p><strong>Start Time:</strong> {{ entry.startTime }}</p>
+                    <p><strong>Peak Time:</strong> {{ entry.peakTime }}</p>
+                    <p><strong>End Time:</strong> {{ entry.endTime }}</p>
+                    <p><strong>Class Type:</strong> {{ entry.classType }}</p>
+                    <p><strong>Source Location:</strong> {{ entry.sourceLocation }}</p>
+                
+                    <!-- Check the class of the solar flare to determine danger -->
+                    {% if entry.classType == "X" %}
+                        <p style="color: #ff4d4d;"><strong>This is an X-class solar flare, which is highly dangerous and could cause significant disruptions to communication systems.</strong></p>
+                    {% elif entry.classType == "M" %}
+                        <p style="color: #ffa500;"><strong>This is an M-class solar flare, which is moderately dangerous and could cause minor disruptions.</strong></p>
+                    {% else %}
+                        <p style="color: #6bc46e;"><strong>This solar flare is not considered dangerous.</strong></p>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
         {% else %}

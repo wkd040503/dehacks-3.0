@@ -6,7 +6,7 @@
     <title>Asteroids - Date Range</title>
     <style>
         body {
-            background-color: #1c1c2b;
+            background-image: url('https://i.pinimg.com/564x/71/82/be/7182bea1e4943c1a61cbe755d9b8ce68.jpg');
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -140,13 +140,20 @@
             <div class="data-container">
                 {% for entry in asteroids %}
                     <div class="asteroid-entry">
-                        <p><strong>Name:</strong> {{ entry.name }}</p>
-                        <p><strong>Close Approach Date:</strong> {{ entry.close_approach_date }}</p>
-                        <p><strong>Miss Distance (km):</strong> {{ entry.miss_distance_km }}</p>
-                        <p><strong>Relative Velocity (km/s):</strong> {{ entry.relative_velocity_km_s }}</p>
-                        <p><strong>Diameter (min - max km):</strong> {{ entry.diameter_min_km }} - {{ entry.diameter_max_km }}</p>
-                        <p><strong>Potentially Hazardous:</strong> {{ "Yes" if entry.is_potentially_hazardous else "No" }}</p>
-                    </div>
+    <p><strong>Name:</strong> {{ entry.name }}</p>
+    <p><strong>Close Approach Date:</strong> {{ entry.close_approach_date }}</p>
+    <p><strong>Miss Distance (km):</strong> {{ entry.miss_distance_km }}</p>
+    <p><strong>Relative Velocity (km/s):</strong> {{ entry.relative_velocity_km_s }}</p>
+    <p><strong>Diameter (min - max km):</strong> {{ entry.diameter_min_km }} - {{ entry.diameter_max_km }}</p>
+    <p><strong>Potentially Hazardous:</strong> {{ "Yes" if entry.is_potentially_hazardous else "No" }}</p>
+
+    {% if entry.is_potentially_hazardous %}
+        <p style="color: #ff4d4d;"><strong>This asteroid is classified as potentially hazardous. Please be aware!</strong></p>
+    {% else %}
+        <p style="color: #6bc46e;"><strong>This asteroid is not considered dangerous at this time.</strong></p>
+    {% endif %}
+</div> 
+
                 {% endfor %}
             </div>
         {% else %}
